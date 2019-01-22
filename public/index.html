@@ -1,1 +1,38 @@
-<h1>QR
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QCumber</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            text-align: center;
+            font-family: serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <img src="/Qcumber%20-%20deadly%20simple%20QR%20code%20image%20generator%0D%0A%0D%0AUsage%3A%0D%0A%20Access%20https%3A%2F%2Fqr.app.p1kachu.net%2Fsome-text.png%20and%20you'll%20get%20the%20image..png"><br>
+        <a :href="url">{{ url }}</a><br><br>
+        <textarea v-model="text"></textarea>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#wrap',
+            computed: {
+                url: v => `${location.href}${encodeURI(v.text)}.png`
+            },
+            data: {
+                text: 'Text here'
+            }
+        })
+    </script>
+</body>
+</html>
