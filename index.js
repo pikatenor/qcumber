@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 8080;
 const app = new Koa();
 const draw = require('./draw');
 
+app.proxy = true;
+
 app.use(async (ctx, next) => {
     try {
         await next();
@@ -16,12 +18,12 @@ app.use(async (ctx, next) => {
         ctx.status = err.status || 500;
         await send(ctx, '/public/error.png');
     }
-    console.log(`${ctx.method} ${ctx.status} ${ctx.url}`);
+    console.log(`${ctx.request.ip} ${ctx.method} ${ctx.status} ${ctx.url}`);
 });
 
-app.use(serve(__dirname + '/public'));
-
 app.use(rt.get('/:text.png', draw));
+
+app.use(serve(__dirname + '/public'));
 
 app.listen(PORT, HOSTNAME);
 console.log(`Server listening on ${HOSTNAME}:${PORT}`);

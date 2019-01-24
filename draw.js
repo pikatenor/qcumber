@@ -1,10 +1,11 @@
 const Stream = require('stream');
 const qrcode = require('qrcode');
 
-const drawHandler = async (ctx, text) => {
+const drawHandler = (ctx, text) => {
     ctx.type = 'image/png';
-    const stream = ctx.body = new Stream.PassThrough();
-    stream.on('error', () => ctx.throw(500));
+    ctx.body = new Stream.PassThrough();
+    const stream = new Stream.PassThrough();
+    stream.on('error', ctx.onerror).pipe(ctx.body);
     qrcode.toFileStream(stream, text);
 }
 

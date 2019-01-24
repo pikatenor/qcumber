@@ -27,7 +27,7 @@
         new Vue({
             el: '#wrap',
             computed: {
-                url: v => `${location.href}${encodeURI(v.text)}.png`
+                url: v => `${location.href}${encodeURIComponent(v.text)}.png`
             },
             data: {
                 text: 'Text here'
